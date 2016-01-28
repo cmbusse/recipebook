@@ -37,15 +37,18 @@
             <input type="password" id="password" name="password" class="form-control" ng-model="credentials.password" placeholder="Password" popover="{{popoverMsg}}" popover-trigger="focus" password-validator required>
           <div ng-messages="userForm.password.$error" role="alert">
             <p class="help-block error-text" ng-message="required">Password is required.</p>
-            <div ng-repeat="passwordError in passwordErrors">
+            <div>
               <p class="help-block error-text" ng-show="userForm.password.$error.requirements">{{passwordError}}</p>
             </div>
           </div>
         </div>
+        <!--
+        Requirements bar no longer being used as moving away from owasp test, keeping here in case will be used in future
         <div class="form-group" ng-show="!userForm.password.$error.required">
           <label>Password Requirements</label>
           <progressbar value="requirementsProgress" type="{{requirementsColor}}"><span style="color:white; white-space:nowrap;">{{requirementsProgress}}%</span></progressbar>
         </div>
+        -->
         <div class="text-center form-group">
           <button type="submit" class="btn btn-primary">Sign up</button>
           &nbsp; or&nbsp;

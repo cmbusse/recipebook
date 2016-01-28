@@ -8,6 +8,8 @@ angular.module('users')
         ngModel.$validators.requirements = function (password) {
           var status = true;
           if (password) {
+            /*
+            * Old password validation, removed due to being overly complicated
             var result = PasswordValidator.getResult(password);
             var requirementsIdx = 0;
 
@@ -26,14 +28,15 @@ angular.module('users')
 
             scope.requirementsColor = requirementsMeter[requirementsIdx].color;
             scope.requirementsProgress = requirementsMeter[requirementsIdx].progress;
-
-            if (result.errors.length) {
+            */
+            // Validation now just checks if length of password is at least 6
+            if (password.length < 6) {
               scope.popoverMsg = PasswordValidator.getPopoverMsg();
-              scope.passwordErrors = result.errors;
+              scope.passwordError = 'Password must be 6 or more characters.';
               status = false;
             } else {
               scope.popoverMsg = '';
-              scope.passwordErrors = [];
+              scope.passwordError = [];
               status = true;
             }
           }

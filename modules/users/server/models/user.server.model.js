@@ -117,9 +117,11 @@ UserSchema.pre('save', function (next) {
  */
 UserSchema.pre('validate', function (next) {
   if (this.provider === 'local' && this.password && this.isModified('password')) {
-    var result = owasp.test(this.password);
-    if (result.errors.length) {
-      var error = result.errors.join(' ');
+    // Removing owasp test
+    // var result = owasp.test(this.password);
+    // Now just does one final check to make sure that the lengh of password is at least 6
+    if (this.password.length < 6) {
+      var error = 'Password must be 6 or more characters.';
       this.invalidate('password', error);
     }
   }
