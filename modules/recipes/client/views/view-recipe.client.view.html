@@ -1,8 +1,14 @@
 <section>
-  <div class="page-header">
-    <h1 ng-bind="vm.recipe.title"></h1>
+  <h1 ng-bind="vm.recipe.title"></h1>
+  <h3>Ingredients</h3>
+  <div ng-repeat="ingredient in vm.ingredients track by $index">
+    <span>{{ingredient.quantity}} {{ingredient.unit}} - {{ingredient.content}}</span>
   </div>
-  <div class="pull-right" ng-show="vm.authentication.user._id == vm.recipe.user._id">
+  <h3>Steps</h3>
+  <div ng-repeat="step in vm.steps track by $index">
+    <span>{{$index + 1}}.  {{step.content}}</span>
+  </div>
+  <div class="pull-right">
     <a class="btn btn-primary" ui-sref="recipes.edit({ recipeId: vm.recipe._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
