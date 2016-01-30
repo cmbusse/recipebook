@@ -12,10 +12,39 @@
             <p class="help-block error-text" ng-message="required">Recipe title is required.</p>
           </div>
         </div>
-        <div class="form-group">
-          <label class="control-label" for="content">Content</label>
-          <textarea name="content" data-ng-model="vm.recipe.content" id="content" class="form-control" cols="30" rows="10" placeholder="Content"></textarea>
+        <div data-ng-repeat="ingredient in vm.ingredients">
+          <div class="row">
+            <div class="form-group col-md-4" show-errors>
+              <label class="control-label" for="ingredient.quantity">Quantity</label>
+              <input name="quantity" type="text" ng-model="ingredient.quantity" id="quantity" class="form-control" placeholder="Quantity" required>
+              <div ng-messages="ingredient.quantity.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Ingredient quantity is required.</p>
+              </div>
+            </div>
+            <div class="form-group col-md-4" show-errors>
+              <label class="control-label" for="ingredient.unit">Unit</label>
+              <input name="unit" type="text" ng-model="ingredient.unit" id="unit" class="form-control" placeholder="Unit" required>
+              <div ng-messages="ingredient.unit.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Ingredient unit is required.</p>
+              </div>
+            </div>
+            <div class="form-group col-md-4" show-errors>
+              <label class="control-label" for="ingredient.content">Ingredient</label>
+              <input name="content" type="text" ng-model="ingredient.content" id="content" class="form-control" placeholder="Ingredient" required>
+              <div ng-messages="ingredient.content.$error" role="alert">
+                <p class="help-block error-text" ng-message="required">Ingredient is required.</p>
+              </div>
+            </div>
+          </div>
         </div>
+        <button class="btn btn-default" ng-click="vm.addNewIngredient()">+</button>
+        <div data-ng-repeat="step in vm.steps track by $index">
+          <div class="form-group">
+            <label class="control-label" for="step">Step</label>
+            <input name="step" ng-model="step.content" id="step" class="form-control" placeholder="Step" required></textarea>
+          </div>
+        </div>
+        <button class="btn btn-default" ng-click="vm.addNewStep()">+</button>
         <div class="form-group">
           <button type="submit" class="btn btn-default">{{vm.recipe._id ? 'Update' : 'Create'}}</button>
         </div>

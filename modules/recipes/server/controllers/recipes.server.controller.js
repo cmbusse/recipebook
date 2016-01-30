@@ -5,14 +5,47 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
+  Ingredient = mongoose.model('Ingredient'),
   Recipe = mongoose.model('Recipe'),
+  Step = mongoose.model('Step'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
  * Create an recipe
  */
 exports.create = function (req, res) {
-  var recipe = new Recipe(req.body);
+  //var recipe = new Recipe(req.body);
+  //recipe.user = req.user;
+  var entry = req.body;
+
+  // Creating array of IngredientSchema items
+  var ingredientsArray = [];
+  for(var i = 0; i < entry.ingredients.length; i++){
+    var ingredient = new Ingredient({
+      quantity: entry.ingredients[i].quantity,
+      unit: entry.ingredients[i].unit,
+      content: entry.ingredients[i].content
+    });
+    ingredientsArray.push(ingredient);
+  }
+
+  // Creating array of Strings for Steps
+  var stepsArray = [];
+  for(i = 0; i < entry.steps.length; i++){
+    var step = new Step({
+      content: entry.steps[i].content
+    });
+    stepsArray.push(step);
+  }
+
+  // Creating a new RecipeSchema item from components
+  var newRecipe = {
+    ingredients: ingredientsArray,
+    steps: stepsArray,
+    title: entry.title
+  };
+
+  var recipe = new Recipe(newRecipe);
   recipe.user = req.user;
 
   recipe.save(function (err) {
