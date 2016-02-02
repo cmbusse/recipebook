@@ -18,7 +18,9 @@
     vm.save = save;
     vm.addNewIngredient = addNewIngredient;
     vm.addNewStep = addNewStep;
-    //vm.removeLastIngredient = removeLastIngredient;
+    vm.removeIngredient = removeIngredient;
+    vm.removeStep = removeStep;
+
     if (vm.recipe._id){
       vm.ingredients = [];
       vm.steps = [];
@@ -58,6 +60,44 @@
         content: ''
       };
       vm.steps.push(newStep);
+    }
+
+    function removeIngredient(index) {
+      var newIngredientArray = [];
+      for(var i = 0; i < index; i++){
+        var newIngredient = {
+          quantity: vm.ingredients[i].quantity,
+          unit: vm.ingredients[i].unit,
+          content: vm.ingredients[i].content
+        };
+        newIngredientArray.push(newIngredient);
+      }
+      for(i = index + 1; i < vm.ingredients.length; i++){
+        var newIngredient2 = {
+          quantity: vm.ingredients[i].quantity,
+          unit: vm.ingredients[i].unit,
+          content: vm.ingredients[i].content
+        };
+        newIngredientArray.push(newIngredient2);
+      }
+      vm.ingredients = newIngredientArray;
+    }
+
+    function removeStep(index) {
+      var newStepArray = [];
+      for(var i = 0; i < index; i++){
+        var newStep = {
+          content: vm.steps[i].content
+        };
+        newStepArray.push(newStep);
+      }
+      for(i = index + 1; i < vm.ingredients.length; i++){
+       var newStep2 = {
+          content: vm.steps[i].content
+        };
+        newStepArray.push(newStep2);
+      }
+      vm.steps = newStepArray;
     }
 
     // Remove existing Article
