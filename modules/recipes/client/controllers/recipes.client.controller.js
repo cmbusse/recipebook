@@ -30,7 +30,7 @@
       }
     } else {
       vm.ingredients = [{
-        quantity: 0,
+        quantity: '',
         unit: '',
         content: ''
       }];
@@ -45,7 +45,7 @@
     // Add ingredient to list
     function addNewIngredient() {
       var newIngredient = {
-        quantity: 0,
+        quantity: '',
         unit: '',
         content: ''
       };
@@ -71,6 +71,18 @@
     function save(isValid) {
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.recipeForm');
+        for(var i = 0; i < vm.ingredients.length; i++){
+          var quantityString = 'vm.form.quantityForm_' + i;
+          var unitString = 'vm.form.unitForm_' + i;
+          var contentString = 'vm.form.contentForm_' + i;
+          $scope.$broadcast('show-errors-check-validity', quantityString);
+          $scope.$broadcast('show-errors-check-validity', unitString);
+          $scope.$broadcast('show-errors-check-validity', contentString);
+        }
+        for(i = 0; i < vm.steps.length; i++){
+          var stepString = 'vm.form.stepForm_' + i;
+          $scope.$broadcast('show-errors-check-validity', stepString);
+        }
         return false;
       }
 

@@ -73,7 +73,8 @@ exports.update = function (req, res) {
   var recipe = req.recipe;
 
   recipe.title = req.body.title;
-  recipe.content = req.body.content;
+  recipe.ingredients = req.body.ingredients;
+  recipe.steps = req.body.steps;
 
   recipe.save(function (err) {
     if (err) {

@@ -11,7 +11,9 @@ var mongoose = require('mongoose'),
  */
 var IngredientSchema = new Schema({
   quantity: {
-    type: Number,
+    type: String,
+    deafult: '',
+    trim: true,
     required: 'Quantity cannot be blank'
   },
   unit: {
