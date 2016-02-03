@@ -42,7 +42,6 @@
     }
 
     // TODO:  Implement up/down arrows, or possibly drag and drop if possible
-    // TODO:  Implement a way to delete an ingredient, extend this to steps as well
 
     // Add ingredient to list
     function addNewIngredient() {
@@ -63,41 +62,59 @@
     }
 
     function removeIngredient(index) {
-      var newIngredientArray = [];
-      for(var i = 0; i < index; i++){
-        var newIngredient = {
-          quantity: vm.ingredients[i].quantity,
-          unit: vm.ingredients[i].unit,
-          content: vm.ingredients[i].content
+      // If only one ingredient in list and its being removed, insert a blank ingredient in its place
+      if(vm.ingredients.length === 1){
+        var blankIngredient = {
+          quantity: '',
+          unit: '',
+          content: ''
         };
-        newIngredientArray.push(newIngredient);
+        vm.ingredients[0] = blankIngredient;
+      } else{
+        var newIngredientArray = [];
+        for(var i = 0; i < index; i++){
+          var newIngredient = {
+            quantity: vm.ingredients[i].quantity,
+            unit: vm.ingredients[i].unit,
+            content: vm.ingredients[i].content
+          };
+          newIngredientArray.push(newIngredient);
+        }
+        for(i = index + 1; i < vm.ingredients.length; i++){
+          var newIngredient2 = {
+            quantity: vm.ingredients[i].quantity,
+            unit: vm.ingredients[i].unit,
+            content: vm.ingredients[i].content
+          };
+          newIngredientArray.push(newIngredient2);
+        }
+        vm.ingredients = newIngredientArray;
       }
-      for(i = index + 1; i < vm.ingredients.length; i++){
-        var newIngredient2 = {
-          quantity: vm.ingredients[i].quantity,
-          unit: vm.ingredients[i].unit,
-          content: vm.ingredients[i].content
-        };
-        newIngredientArray.push(newIngredient2);
-      }
-      vm.ingredients = newIngredientArray;
     }
 
     function removeStep(index) {
-      var newStepArray = [];
-      for(var i = 0; i < index; i++){
-        var newStep = {
-          content: vm.steps[i].content
+      // If only one step in list and its being removed, insert a blank step in its place
+      if(vm.steps.length === 1){
+        var blankStep = {
+          content: ''
         };
-        newStepArray.push(newStep);
+        vm.steps[0] = blankStep;
+      } else{
+        var newStepArray = [];
+        for(var i = 0; i < index; i++){
+          var newStep = {
+            content: vm.steps[i].content
+          };
+          newStepArray.push(newStep);
+        }
+        for(i = index + 1; i < vm.steps.length; i++){
+          var newStep2 = {
+            content: vm.steps[i].content
+          };
+          newStepArray.push(newStep2);
+        }
+        vm.steps = newStepArray;
       }
-      for(i = index + 1; i < vm.steps.length; i++){
-       var newStep2 = {
-          content: vm.steps[i].content
-        };
-        newStepArray.push(newStep2);
-      }
-      vm.steps = newStepArray;
     }
 
     // Remove existing Article
