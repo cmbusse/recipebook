@@ -52,6 +52,21 @@
         resolve: {
           recipeResolve: getArticle
         }
+      })
+      .state('recipes.myrecipes', {
+        url: '/myrecipes',
+        templateUrl: 'modules/recipes/client/views/my-recipes.client.view.html',
+        controller: 'RecipeCollectionController'
+      })
+      .state('recipes.myfavorites', {
+        url: '/favorites',
+        templateUrl: 'modules/recipes/client/views/favorites.client.view.html',
+        controller: 'RecipeCollectionController'
+      })
+      .state('recipes.mybookmarks', {
+        url: '/bookmarks',
+        templateUrl: 'modules/recipes/client/views/bookmarks.client.view.html',
+        controller: 'RecipeCollectionController'
       });
   }
 
