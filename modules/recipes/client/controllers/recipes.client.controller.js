@@ -91,7 +91,7 @@
         };
         newStepArray.push(newStep);
       }
-      for(i = index + 1; i < vm.ingredients.length; i++){
+      for(i = index + 1; i < vm.steps.length; i++){
        var newStep2 = {
           content: vm.steps[i].content
         };
