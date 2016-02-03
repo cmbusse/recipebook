@@ -56,15 +56,31 @@ var RecipeSchema = new Schema({
   },
   ingredients: [IngredientSchema],
   steps: [StepSchema],
-  authorLastName: {
+  prepTime: {
     type: String,
-    trim: true
+    default: '',
+    trim: true,
+    required: 'Prep Time cannot be blank'
   },
-  authorFirstName: {
+  cookTime: {
     type: String,
-    trim: true
+    default: '',
+    trim: true,
+    required: 'Cook Time cannot be blank' 
   },
-  profileImageURL: {
+  numServings: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Number of Servings cannot be blank'
+  },
+  description: {
+    type: String,
+    default: '',
+    trim: true,
+    required: 'Description cannot be blank'
+  },
+  imageURL: {
     type: String,
     default: 'modules/recipes/client/img/photography111.png'
   },

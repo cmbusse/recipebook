@@ -10,6 +10,26 @@
           <input name="title" type="text" ng-model="vm.recipe.title" id="title" class="form-control" placeholder="Title" required>
           <p class="help-block error-text" ng-show="vm.form.recipeForm.title.$invalid">Recipe title is required.</p>
         </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="prepTime">Prep Time</label>
+          <input name="prepTime" type="text" ng-model="vm.recipe.prepTime" id="" class="form-control" placeholder="Title" required>
+          <p class="help-block error-text" ng-show="vm.form.recipeForm.prepTime.$invalid">Prep Time is required.</p>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="cookTime">Cook Time</label>
+          <input name="cookTime" type="text" ng-model="vm.recipe.cookTime" id="" class="form-control" placeholder="Title" required>
+          <p class="help-block error-text" ng-show="vm.form.recipeForm.cookTime.$invalid">Cook Time is required.</p>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="numServings">Number of Servings</label>
+          <input name="numServings" type="text" ng-model="vm.recipe.numServings" id="" class="form-control" placeholder="Title" required>
+          <p class="help-block error-text" ng-show="vm.form.recipeForm.numServings.$invalid">Number of Servings is required.</p>
+        </div>
+        <div class="form-group" show-errors>
+          <label class="control-label" for="description">Description</label>
+          <input name="" type="text" ng-model="vm.recipe.description" id="description" class="form-control" placeholder="Title" required>
+          <p class="help-block error-text" ng-show="vm.form.recipeForm.description.$invalid">Description is required.</p>
+        </div>
         <div data-ng-repeat="ingredient in vm.ingredients track by $index">
           <div class="row">
             <div class="form-group col-md-2" ng-form="vm.form.quantityForm_{{$index}}" show-errors>

@@ -1,5 +1,9 @@
 <section>
   <h1 ng-bind="vm.recipe.title"></h1>
+  <h4>{{vm.recipe.description}}</h4>
+  <h4>Serves {{vm.recipe.numServings}}</h4>
+  <h4 class="text-muted">Prep Time:  {{vm.recipe.prepTime}}</h4>
+  <h4 class="text-muted">Cook Time:  {{vm.recipe.cookTime}}</h4>
   <h3>Ingredients</h3>
   <div ng-repeat="ingredient in vm.ingredients track by $index">
     <span>{{ingredient.quantity}} {{ingredient.unit}} - {{ingredient.content}}</span>
@@ -8,6 +12,7 @@
   <div ng-repeat="step in vm.steps track by $index">
     <span>{{$index + 1}}.  {{step.content}}</span>
   </div>
+  <img ng-src="{{vm.recipe.imageURL}}" class="img-thumbnail user-profile-picture">
   <div class="pull-right">
     <a class="btn btn-primary" ui-sref="recipes.edit({ recipeId: vm.recipe._id })">
       <i class="glyphicon glyphicon-edit"></i>

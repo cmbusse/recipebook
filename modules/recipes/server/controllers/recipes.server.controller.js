@@ -40,9 +40,14 @@ exports.create = function (req, res) {
 
   // Creating a new RecipeSchema item from components
   var newRecipe = {
+    title: entry.title,
     ingredients: ingredientsArray,
     steps: stepsArray,
-    title: entry.title
+    prepTime: entry.prepTime,
+    cookTime: entry.cookTime,
+    numServings: entry.numServings,
+    description: entry.description
+    //profileImageURL: entry.profileImageURL
   };
 
   var recipe = new Recipe(newRecipe);
@@ -71,10 +76,15 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
   var recipe = req.recipe;
-
+  // TODO:  Why doesn't req.recipe give us everything we need, and why do we need the req.body stuff?
   recipe.title = req.body.title;
   recipe.ingredients = req.body.ingredients;
   recipe.steps = req.body.steps;
+  recipe.prepTime = req.body.prepTime;
+  recipe.cookTime = req.body.cookTime;
+  recipe.numServings = req.body.numServings;
+  recipe.description = req.body.description;
+  recipe.imageUrl = req.body.imageUrl;
 
   recipe.save(function (err) {
     if (err) {
