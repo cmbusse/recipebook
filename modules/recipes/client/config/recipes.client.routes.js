@@ -16,9 +16,8 @@
       })
       .state('recipes.list', {
         url: '',
-        templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html',
-        controller: 'RecipesListController',
-        controllerAs: 'vm'
+        templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html'
+        //controller: 'RecipesListController'
       })
       .state('recipes.create', {
         url: '/create',
@@ -56,17 +55,20 @@
       .state('recipes.myrecipes', {
         url: '/myrecipes',
         templateUrl: 'modules/recipes/client/views/my-recipes.client.view.html',
-        controller: 'RecipeCollectionController'
+        controller: 'RecipesListController',
+        controllerAs: 'vm'
       })
       .state('recipes.myfavorites', {
         url: '/favorites',
         templateUrl: 'modules/recipes/client/views/favorites.client.view.html',
-        controller: 'RecipeCollectionController'
+        controller: 'RecipesListController',
+        controllerAs: 'vm'
       })
       .state('recipes.mybookmarks', {
         url: '/bookmarks',
         templateUrl: 'modules/recipes/client/views/bookmarks.client.view.html',
-        controller: 'RecipeCollectionController'
+        controller: 'RecipesListController',
+        controllerAs: 'vm'
       });
   }
 

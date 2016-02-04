@@ -24,8 +24,8 @@
     // Add the dropdown create item
     Menus.addSubMenuItem('topbar', 'recipes', {
       title: 'Create Recipe',
-      state: 'recipes.create',
-      roles: ['user']
+      state: 'recipes.create'
+      //roles: ['user']
     });
   }
 })();

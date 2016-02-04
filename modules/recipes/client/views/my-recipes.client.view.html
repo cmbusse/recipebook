@@ -1,3 +1,8 @@
-<section>
-This is my recipes view {{vari}}
+<section ng-controller="RecipesListController" ng-init="seedMyRecipes()">
+  This is my recipes view {{vari}}
+  <div ng-click="testFunc()">Click Me</div>
+  <div ng-repeat="recipe in recipes track by $index">
+  	{{recipe.title}}<br>
+  </div>
+
 </section>
