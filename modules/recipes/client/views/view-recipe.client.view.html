@@ -6,7 +6,7 @@
   <h4 class="text-muted">Cook Time:  {{vm.recipe.cookTime}}</h4>
   <h3>Ingredients</h3>
   <div ng-repeat="ingredient in vm.ingredients track by $index">
-    <span>{{ingredient.quantity}} {{ingredient.unit}} - {{ingredient.content}}</span>
+    <span>{{ingredient.content}}</span>
   </div>
   <h3>Steps</h3>
   <div ng-repeat="step in vm.steps track by $index">

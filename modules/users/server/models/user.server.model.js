@@ -95,6 +95,7 @@ var UserSchema = new Schema({
   myRecipes: [String],
   myFavorites: [String],
   myStarred: [String],
+  groceryList: [String],
   /* For reset password */
   resetPasswordToken: {
     type: String

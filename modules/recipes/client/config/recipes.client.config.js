@@ -27,5 +27,11 @@
       state: 'recipes.create'
       //roles: ['user']
     });
+
+    Menus.addSubMenuItem('topbar', 'recipes', {
+      title: 'My Recipes',
+      state: 'recipes.myrecipes'
+    });
+
   }
 })();

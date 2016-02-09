@@ -22,8 +22,6 @@ exports.create = function (req, res) {
   var ingredientsArray = [];
   for(var i = 0; i < entry.ingredients.length; i++){
     var ingredient = new Ingredient({
-      quantity: entry.ingredients[i].quantity,
-      unit: entry.ingredients[i].unit,
       content: entry.ingredients[i].content
     });
     ingredientsArray.push(ingredient);

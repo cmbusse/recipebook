@@ -32,8 +32,6 @@
       }
     } else {
       vm.ingredients = [{
-        quantity: '',
-        unit: '',
         content: ''
       }];
       vm.steps = [{
@@ -46,8 +44,6 @@
     // Add ingredient to list
     function addNewIngredient() {
       var newIngredient = {
-        quantity: '',
-        unit: '',
         content: ''
       };
       vm.ingredients.push(newIngredient);
@@ -65,8 +61,6 @@
       // If only one ingredient in list and its being removed, insert a blank ingredient in its place
       if(vm.ingredients.length === 1){
         var blankIngredient = {
-          quantity: '',
-          unit: '',
           content: ''
         };
         vm.ingredients[0] = blankIngredient;
@@ -74,16 +68,12 @@
         var newIngredientArray = [];
         for(var i = 0; i < index; i++){
           var newIngredient = {
-            quantity: vm.ingredients[i].quantity,
-            unit: vm.ingredients[i].unit,
             content: vm.ingredients[i].content
           };
           newIngredientArray.push(newIngredient);
         }
         for(i = index + 1; i < vm.ingredients.length; i++){
           var newIngredient2 = {
-            quantity: vm.ingredients[i].quantity,
-            unit: vm.ingredients[i].unit,
             content: vm.ingredients[i].content
           };
           newIngredientArray.push(newIngredient2);
@@ -129,12 +119,8 @@
       if (!isValid) {
         $scope.$broadcast('show-errors-check-validity', 'vm.form.recipeForm');
         for(var i = 0; i < vm.ingredients.length; i++){
-          var quantityString = 'vm.form.quantityForm_' + i;
-          var unitString = 'vm.form.unitForm_' + i;
-          var contentString = 'vm.form.contentForm_' + i;
-          $scope.$broadcast('show-errors-check-validity', quantityString);
-          $scope.$broadcast('show-errors-check-validity', unitString);
-          $scope.$broadcast('show-errors-check-validity', contentString);
+          var ingredientString = 'vm.form.ingredientForm_' + i;
+          $scope.$broadcast('show-errors-check-validity', ingredientString);
         }
         for(i = 0; i < vm.steps.length; i++){
           var stepString = 'vm.form.stepForm_' + i;
