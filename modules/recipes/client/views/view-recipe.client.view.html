@@ -1,34 +1,55 @@
 <section>
-  <h1 ng-bind="vm.recipe.title"></h1>
-  <h4>{{vm.recipe.description}}</h4>
-  <h4>Serves {{vm.recipe.numServings}}</h4>
-  <h4 class="text-muted">Prep Time:  {{vm.recipe.prepTime}}</h4>
-  <h4 class="text-muted">Cook Time:  {{vm.recipe.cookTime}}</h4>
+  <h1 ng-bind="recipe.title"></h1>
+  <h4>{{recipe.description}}</h4>
+  <h4>Serves {{recipe.numServings}}</h4>
+  <h4 class="text-muted">Prep Time:  {{recipe.prepTime}}</h4>
+  <h4 class="text-muted">Cook Time:  {{recipe.cookTime}}</h4>
   <h3>Ingredients</h3>
-  <div ng-repeat="ingredient in vm.ingredients track by $index">
+  <button class="btn btn-success" ng-click="open()">Add Ingredients to Grocery List</button>
+  <!--  TODO:  Implement at later date possibly different sized modals based on screen size etc.
+  <button class="btn btn-default" ng-click="open('lg')">Large modal</button>
+  <button class="btn btn-default" ng-click="open('sm')">Small modal</button>
+  -->
+  <div ng-repeat="ingredient in ingredients track by $index">
     <span>{{ingredient.content}}</span>
   </div>
   <h3>Steps</h3>
-  <div ng-repeat="step in vm.steps track by $index">
+  <div ng-repeat="step in steps track by $index">
     <span>{{$index + 1}}.  {{step.content}}</span>
   </div>
-  <img ng-src="{{vm.recipe.imageURL}}" class="img-thumbnail user-profile-picture">
+  <img ng-src="{{recipe.imageURL}}" class="img-thumbnail user-profile-picture">
   <div class="pull-right">
-    <a class="btn btn-primary" ui-sref="recipes.edit({ recipeId: vm.recipe._id })">
+    <a class="btn btn-primary" ui-sref="recipes.edit({ recipeId: recipe._id })">
       <i class="glyphicon glyphicon-edit"></i>
     </a>
-    <a class="btn btn-primary" ng-click="vm.remove()">
+    <a class="btn btn-primary" ng-click="remove()">
       <i class="glyphicon glyphicon-trash"></i>
     </a>
   </div>
   <small>
     <em class="text-muted">
       Posted on
-      <span ng-bind="vm.recipe.created | date:'mediumDate'"></span>
+      <span ng-bind="recipe.created | date:'mediumDate'"></span>
       by
-      <span ng-if="vm.recipe.user" ng-bind="vm.recipe.user.displayName"></span>
-      <span ng-if="!vm.recipe.user">Deleted User</span>
+      <span ng-if="recipe.user" ng-bind="recipe.user.displayName"></span>
+      <span ng-if="!recipe.user">Deleted User</span>
     </em>
   </small>
-  <p class="lead" ng-bind="vm.recipe.content"></p>
+  <p class="lead" ng-bind="recipe.content"></p>
+
+  <script type="text/ng-template" id="myModalContent.html">
+      <div class="modal-header">
+        <h3 class="modal-title">Add Ingredients to Grocery List</h3>
+        <p>Select each item you&#39;d like to add to your grocery list</p>
+      </div>
+      <div class="modal-body">
+        <div class="form-group" ng-repeat="item in items"> 
+          <input type="checkbox" checklist-model="selected.items" checklist-value="item"> - {{item.content}} <br>
+        </div>
+      </div>
+      <div class="modal-footer">
+          <button ng-click="addItemsToGroceryList()" class="btn btn-primary">Add to Grocery List</button>
+          <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+      </div>
+  </script>
 </section>

@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('recipes').controller('RecipesListController', ['$scope', 'RecipesService', '$state', 'Authentication', 'Admin', 'Users',
-  function ($scope, RecipesService, $state, Authentication, Admin, Users) {
+angular.module('recipes').controller('RecipesListController', ['$scope', 'RecipesService', '$state', 'Authentication', 'Admin', 'Users', '$modal', '$log',
+  function ($scope, RecipesService, $state, Authentication, Admin, Users, $modal, $log) {
     $scope.authentication = Authentication;
     $scope.recipes = RecipesService.query();
     $scope.myRecipes = [];
@@ -63,7 +63,5 @@ angular.module('recipes').controller('RecipesListController', ['$scope', 'Recipe
         $scope.error = response.data.message;
       });
     };
-
   }
-
 ]);

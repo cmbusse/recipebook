@@ -3,7 +3,7 @@
     <h1>Recipes</h1>
   </div>
   <div class="list-group">
-    <a ng-repeat="recipe in vm.recipes" ui-sref="recipes.view({ recipeId: recipe._id })" class="list-group-item">
+    <a ng-repeat="recipe in recipes" ui-sref="recipes.view({ recipeId: recipe._id })" class="list-group-item">
       <small class="list-group-item-text">
         Posted on
         <span ng-bind="recipe.created | date:'mediumDate'"></span>
@@ -15,7 +15,7 @@
       <p class="list-group-item-text" ng-bind="recipe.content"></p>
     </a>
   </div>
-  <div class="alert alert-warning text-center" ng-if="vm.recipes.$resolved && !vm.recipes.length">
+  <div class="alert alert-warning text-center" ng-if="recipes.$resolved && !recipes.length">
     No recipes yet, why don't you <a ui-sref="recipes.create">create one</a>?
   </div>
 </section>

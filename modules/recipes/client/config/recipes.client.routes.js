@@ -16,8 +16,8 @@
       })
       .state('recipes.list', {
         url: '',
-        templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html'
-        //controller: 'RecipesListController'
+        templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html',
+        controller: 'RecipesListController'
       })
       .state('recipes.create', {
         url: '/create',
