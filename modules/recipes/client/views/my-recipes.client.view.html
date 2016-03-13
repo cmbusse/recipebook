@@ -1,6 +1,8 @@
-<section ng-controller="RecipesListController" ng-init="seedMyRecipes(); findCurrentUserID()">
-  <div ng-click="testFunc()">Click Me</div>
+<section ng-controller="RecipesListController" ng-init="buildPage()">
   <div ng-repeat="recipe in myRecipes track by $index">
   	{{recipe.title}}<br>
+  </div>
+  <div>
+  	<p>Test</p>
   </div>
 </section>

@@ -28,6 +28,7 @@
       //roles: ['user']
     });
 
+    // Add the dropdown my recipes item
     Menus.addSubMenuItem('topbar', 'recipes', {
       title: 'My Recipes',
       state: 'recipes.myrecipes'

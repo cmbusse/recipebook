@@ -7,34 +7,34 @@
       <fieldset>
         <div class="form-group" show-errors>
           <label class="control-label" for="title">Title</label>
-          <input name="title" type="text" ng-model="recipe.title" id="title" class="form-control" placeholder="Title" required>
+          <input name="title" type="text" ng-model="recipe.title" id="title" class="form-control" placeholder="" required>
           <p class="help-block error-text" ng-show="form.recipeForm.title.$invalid">Recipe title is required.</p>
         </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="prepTime">Prep Time</label>
-          <input name="prepTime" type="text" ng-model="recipe.prepTime" id="" class="form-control" placeholder="Title" required>
+          <input name="prepTime" type="text" ng-model="recipe.prepTime" id="" class="form-control" placeholder="" required>
           <p class="help-block error-text" ng-show="form.recipeForm.prepTime.$invalid">Prep Time is required.</p>
         </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="cookTime">Cook Time</label>
-          <input name="cookTime" type="text" ng-model="recipe.cookTime" id="" class="form-control" placeholder="Title" required>
+          <input name="cookTime" type="text" ng-model="recipe.cookTime" id="" class="form-control" placeholder="" required>
           <p class="help-block error-text" ng-show="form.recipeForm.cookTime.$invalid">Cook Time is required.</p>
         </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="numServings">Number of Servings</label>
-          <input name="numServings" type="text" ng-model="recipe.numServings" id="" class="form-control" placeholder="Title" required>
+          <input name="numServings" type="text" ng-model="recipe.numServings" id="" class="form-control" placeholder="" required>
           <p class="help-block error-text" ng-show="form.recipeForm.numServings.$invalid">Number of Servings is required.</p>
         </div>
         <div class="form-group" show-errors>
           <label class="control-label" for="description">Description</label>
-          <input name="" type="text" ng-model="recipe.description" id="description" class="form-control" placeholder="Title" required>
+          <input name="description" type="text" ng-model="recipe.description" id="description" class="form-control" placeholder="" required>
           <p class="help-block error-text" ng-show="form.recipeForm.description.$invalid">Description is required.</p>
         </div>
         <div data-ng-repeat="ingredient in ingredients track by $index">
           <div class="row">
             <div class="form-group col-md-10" ng-form="form.ingredientForm_{{$index}}" show-errors>
               <label class="control-label" for="ingredient.content">Ingredient</label>
-              <input name="ingredient" type="text" ng-model="ingredient.content" id="content" class="form-control" placeholder="Ingredient" required>
+              <input name="ingredient" type="text" ng-model="ingredient.content" id="content" class="form-control" placeholder="" required>
               <p class="help-block error-text" ng-show="form.ingredientForm_{{$index}}.$invalid">Ingredient is required.</p>
             </div>
             <div class="btn btn-danger recipeFormMoveXButtonDown" ng-click="removeIngredient($index)">[X]</div>
@@ -46,7 +46,7 @@
           <div class="row">
             <div class="form-group col-md-10" ng-form="form.stepForm_{{$index}}" show-errors>
               <label class="control-label" for="step">Step</label>
-              <input name="step" type="text" ng-model="step.content" id="step" class="form-control" placeholder="Step" required>
+              <input name="step" type="text" ng-model="step.content" id="step" class="form-control" placeholder="" required>
               <p class="help-block error-text" ng-show="form.stepForm_{{$index}}.$invalid">Please fill out this step or remove it</p>
             </div>
             <div class="btn btn-danger recipeFormMoveXButtonDown" ng-click="removeStep($index)">[X]</div>

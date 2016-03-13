@@ -17,7 +17,10 @@
       .state('recipes.list', {
         url: '',
         templateUrl: 'modules/recipes/client/views/list-recipes.client.view.html',
-        controller: 'RecipesListController'
+        controller: 'RecipesController',
+        resolve: {
+          recipeResolve: newRecipe
+        }
       })
       .state('recipes.create', {
         url: '/create',
@@ -25,7 +28,7 @@
         controller: 'RecipesController',
         controllerAs: 'vm',
         resolve: {
-          recipeResolve: newArticle
+          recipeResolve: newRecipe
         },
         data: {
           roles: ['user', 'admin']
@@ -37,7 +40,7 @@
         controller: 'RecipesController',
         controllerAs: 'vm',
         resolve: {
-          recipeResolve: getArticle
+          recipeResolve: getRecipe
         },
         data: {
           roles: ['user', 'admin']
@@ -49,14 +52,13 @@
         controller: 'RecipesController',
         controllerAs: 'vm',
         resolve: {
-          recipeResolve: getArticle
+          recipeResolve: getRecipe
         }
       })
       .state('recipes.myrecipes', {
         url: '/myrecipes',
         templateUrl: 'modules/recipes/client/views/my-recipes.client.view.html',
-        controller: 'RecipesListController',
-        controllerAs: 'vm'
+        controller: 'RecipesListController'
       })
       .state('recipes.myfavorites', {
         url: '/favorites',
@@ -72,17 +74,17 @@
       });
   }
 
-  getArticle.$inject = ['$stateParams', 'RecipesService'];
+  getRecipe.$inject = ['$stateParams', 'RecipesService'];
 
-  function getArticle($stateParams, RecipesService) {
+  function getRecipe($stateParams, RecipesService) {
     return RecipesService.get({
       recipeId: $stateParams.recipeId
     }).$promise;
   }
 
-  newArticle.$inject = ['RecipesService'];
+  newRecipe.$inject = ['RecipesService'];
 
-  function newArticle(RecipesService) {
+  function newRecipe(RecipesService) {
     return new RecipesService();
   }
 })();

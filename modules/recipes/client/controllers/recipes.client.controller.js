@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('recipes').controller('RecipesController', ['$scope', '$state', 'recipeResolve', 'Authentication', '$modal', '$log',   
-  function ($scope, $state, recipe, Authentication, $modal, $log) {
+angular.module('recipes').controller('RecipesController', ['$scope', '$state', 'recipeResolve', 'Authentication', '$modal', '$log', 'RecipesService', 
+  function ($scope, $state, recipe, Authentication, $modal, $log, RecipesService) {
     $scope.recipe = recipe;
+    $scope.recipes = RecipesService.query();
     $scope.authentication = Authentication;
     $scope.error = null;
     $scope.form = {};

@@ -1,57 +1,45 @@
 'use strict';
 
-angular.module('recipes').controller('RecipesListController', ['$scope', 'RecipesService', '$state', 'Authentication', 'Admin', 'Users', '$modal', '$log',
-  function ($scope, RecipesService, $state, Authentication, Admin, Users, $modal, $log) {
-    $scope.authentication = Authentication;
-    $scope.recipes = RecipesService.query();
-    $scope.myRecipes = [];
+angular.module('recipes').controller('RecipesListController', ['$scope', 
+  function ($scope) {
+    $scope.buildPage = function() {
+        $scope.test = 'hello';
+    };
+        /*$scope.authentication = Authentication;
+        $scope.recipes = RecipesService.query();
+        $scope.myRecipes = [];
 
-    Admin.query(function (data) {
-      $scope.users = data;
-    });
-
-    $scope.findCurrentUserID = function(){
-    	$scope.$watch('users.length', function(newValue){
-    		if(newValue > 0){
-    			for(var i = 0; i < $scope.users.length; i++){
-    				if($scope.authentication.user.email === $scope.users[i].email){
-    					$scope.currentUserID = $scope.users[i]._id;
-                        $scope.currentUser = $scope.users[i];
-    				}
-    			}
-    		}
-    	});
+        $scope.$watch('recipes.$resolved', function(newValue, oldValue) {
+            if(newValue === true){
+                Admin.query(function (data) {
+                    $scope.users = data;
+                    $scope.findCurrentUserID();
+                    $scope.seedMyRecipes();
+                });
+            }
+        });
     };
 
-    $scope.seedMyRecipes = function(){
-    	// if user is signed in
-    	if($scope.authentication.user){
-    		$scope.$watch('users.length', function(newValue, oldValue){
-    			// if users gets propogated
-    			if(newValue > 0){
-    				$scope.$watch('recipes.length', function(newValue, oldValue){
-    					// if recipes gets propogated
-			      	if(newValue > 0){
-			      		if($scope.currentUserID){
-			      			// if currentUserID has been set
-			      			if(newValue !== oldValue){
-			      				// Cycle through recipes and add all written by user to myRecipes
-			      				for(var i = 0; i < $scope.recipes.length; i++){
-							        if($scope.recipes[i].user){
-                                        if($scope.recipes[i].user._id === $scope.currentUserID){
-    							          $scope.myRecipes.push($scope.recipes[i]);
-    							        }
-                                    }
-							      }
-			      			}
-						}
-			      	}
-			      });
-    			}
-    		});
+
+    $scope.findCurrentUserID = function(){
+    	for(var i = 0; i < $scope.users.length; i++){
+    		if($scope.authentication.user.email === $scope.users[i].email){
+    			$scope.currentUserID = $scope.users[i]._id;
+                $scope.currentUser = $scope.users[i];
+    		}
     	}
     };
 
+    $scope.seedMyRecipes = function(){
+    	for(var i = 0; i < $scope.recipes.length; i++){
+            if($scope.recipes[i].user){
+                if($scope.recipes[i].user._id === $scope.currentUserID){
+                    $scope.myRecipes.push($scope.recipes[i]);
+                }
+            }
+        }
+    };
+    /*
     $scope.testFunc = function(){
       $scope.success = $scope.error = null;
       $scope.currentUser.myFavorites.push('test');
@@ -63,5 +51,15 @@ angular.module('recipes').controller('RecipesListController', ['$scope', 'Recipe
         $scope.error = response.data.message;
       });
     };
+
+    // Boolean return for is logged in
+    $scope.isLoggedIn = function() {
+        if($scope.authentication.user){
+            return true;
+        } else{
+            return false;
+        }
+    }; 
+    */
   }
 ]);

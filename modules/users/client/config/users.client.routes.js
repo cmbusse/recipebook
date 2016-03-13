@@ -74,3 +74,13 @@ angular.module('users').config(['$stateProvider',
       });
   }
 ]);
+
+// Configuring the Users module
+angular.module('users').run(['Menus',
+  function (Menus) {
+    Menus.addMenuItem('topbar', {
+      title: 'Grocery List',
+      state: 'grocerylist'
+    });
+  }
+]);
