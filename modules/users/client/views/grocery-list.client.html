@@ -35,11 +35,4 @@ Text Grocery List to phone
 Delete Item toggles the confirm in the object
 Clicking Yes deletes it
 No toggles confirm and back to standard
-
-Current Issue:
-message: "Cast to Array failed for value "[object Object],[object Object],[object Object],[object Object]" at path "groceryList""
-groceryList is a String array, putting objects into it is breaking it
-Will want to update the user model so that groceryList is a schema of its own
-Then will need to edit how items are added to grocoery list by recipes.client.controller.js
-Then will need to test that it is working in grocerylist.client.controller.js
 -->

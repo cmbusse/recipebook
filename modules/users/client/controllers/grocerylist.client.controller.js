@@ -45,34 +45,35 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
 
     //
     $scope.removeItem = function(index) {
-      // If only one item in list and its being removed, insert a blank item in its place
-      if($scope.groceryList.length === 1){
-        var blankItem = {
-          content: '',
-          confirm: false
-        };
-        $scope.groceryList[0] = blankItem;
-      } else{
-        var newGroceryListArray = [];
-        for(var i = 0; i < index; i++){
-          var newItem = $scope.groceryList[i];
-          newGroceryListArray.push(newItem);
-        }
-        for(i = index + 1; i < $scope.groceryList.length; i++){
-          var newItem2 = $scope.groceryList[i];
-          newGroceryListArray.push(newItem2);
-        }
-        var user = new Users($scope.user);
-        user.groceryList = newGroceryListArray;
-        user.$update(function (response) {
-          $scope.success = true;
-          Authentication.user = response;
-        }, function (response) {
-          $scope.error = response.data.message;
-        });
-        console.log('blip');
-        $scope.groceryList = newGroceryListArray;
+      // tempGroceryListArray wil hold the edited grocery list of objects
+      var tempGroceryListArray = [];
+      // Remove items up to index
+      for(var i = 0; i < index; i++){
+        var newItem = $scope.groceryList[i];
+        tempGroceryListArray.push(newItem);
       }
+      // Remove items after index
+      for(i = index + 1; i < $scope.groceryList.length; i++){
+        var newItem2 = $scope.groceryList[i];
+        tempGroceryListArray.push(newItem2);
+      }
+      // Restoring grocery to be an array of strings
+      var newGroceryListArray = [];
+      for(i = 0; i < tempGroceryListArray.length; i++){
+        newGroceryListArray.push(tempGroceryListArray[i].content);
+      }
+      // Update the user with newGroceryListArray
+      var user = new Users($scope.user);
+      user.groceryList = newGroceryListArray;
+      user.$update(function (response) {
+        $scope.success = true;
+        Authentication.user = response;
+      }, function (response) {
+        $scope.error = response.data.message;
+      });
+      console.log('blip');
+      // Set groceryList to tempGroceryListArray for proper viewing
+      $scope.groceryList = tempGroceryListArray;
     };
 
     // Cancels the delete process for an item
