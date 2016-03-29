@@ -5,11 +5,14 @@
 	</div>
 	<div ng-if="pageBuilt">
 		<p>This is the grocery list</p>
-		<div ng-repeat="item in groceryList track by $index">
+		<div ng-if="!groceryList.length">
+			Grocery List Empty
+		</div>
+		<div ng-repeat="item in groceryList track by $index" class="groceryListItem">
 			<div class="row">
 				<div class="col-md-8">{{item.content}}</div>
 				<div class="col-md-4" ng-if="!item.confirm">
-					<div class="btn btn-danger recipeFormMoveXButtonDown" ng-click="areYouSure($index)">Delete Item</div>
+					<div class="btn btn-danger recipeFormMoveXButtonDown" ng-click="deleteAreYouSure($index)">Delete Item</div>
 				</div>
 				<div class="col-md-4" ng-if="item.confirm">
 					Are you sure? 
@@ -18,21 +21,28 @@
 				</div>
 			</div>
 		</div>
+		<div>
+			<p>Add items to grocery list?</p>
+			<form name="form.ingredientAddingForm">
+				<input type="text" name="newIngredient" ng-model="form.ingredientToAdd">
+				<div class="btn btn-success" ng-click="addItemToGroceryList()">[+] Add Ingredient</div>
+				<div ng-if="userErrors[0]" style="color: red">Ingredient cannot be blank</div>
+			</form>
+		</div>
+		<div>
+			<div ng-if="!clearConfirm && groceryList.length">
+				<div class="btn btn-danger" ng-click="clearAreYouSure()">Clear Grocery List</div>
+			</div>
+			<div ng-if="clearConfirm">
+				Are you sure?
+				<div class="btn btn-success recipeFormMoveXButtonDown" ng-click="clearGroceryList()">Yes</div>
+				<div class="btn btn-warning recipeFormMoveXButtonDown" ng-click="cancelClear()">No</div>
+			</div>
+		</div>
 	</div>
-
 </section>
 
 
 <!--
-Grocery List Features
-View Grocery List
-Add fields to grocery list
-Remove fields from grocery list
-Save Grccery List
-Clear Grcoery List
 Text Grocery List to phone
-
-Delete Item toggles the confirm in the object
-Clicking Yes deletes it
-No toggles confirm and back to standard
 -->

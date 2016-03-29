@@ -6,6 +6,14 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
     $scope.buildPage = function() {
       $scope.authentication = Authentication;
       $scope.user = Authentication.user;
+      $scope.form = {};
+      $scope.form.ingredientToAdd = '';
+      $scope.clearConfirm = false;
+      /*
+       * Users Errors:
+       * 0 - Ingredient to add is blank
+       */
+      $scope.userErrors = [0];
       if($scope.authentication.user){
         Admin.query(function (data) {
           $scope.users = data;
@@ -36,7 +44,7 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
     };
 
     // Confirms user's choice to delete item from grocery list
-    $scope.areYouSure = function(index) {
+    $scope.deleteAreYouSure = function(index) {
       for(var i = 0; i < $scope.groceryList.length; i++){
         $scope.groceryList[i].confirm = false;
       }
@@ -66,7 +74,6 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
       var user = new Users($scope.user);
       user.groceryList = newGroceryListArray;
       user.$update(function (response) {
-        $scope.success = true;
         Authentication.user = response;
       }, function (response) {
         $scope.error = response.data.message;
@@ -80,28 +87,58 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
     $scope.cancelRemove = function(index) {
       $scope.groceryList[index].confirm = false;
     };
+
+    // Allows user to add an item to the grocery list from grocery list page
+    $scope.addItemToGroceryList = function() {
+      if($scope.form.ingredientToAdd.length === 0){
+        $scope.userErrors[0] = 1;
+      } else {
+        $scope.userErrors[0] = 0;
+        var tempGroceryListArray = [];
+        for(var i = 0; i<$scope.groceryList.length; i++){
+          tempGroceryListArray.push($scope.groceryList[i].content);
+        }
+        tempGroceryListArray.push($scope.form.ingredientToAdd);
+        // Update the user with new grocery list
+        var user = new Users($scope.user);
+        user.groceryList = tempGroceryListArray;
+        user.$update(function (response) {
+          var groceryListObject = {
+              content: user.groceryList[user.groceryList.length-1],
+              confirm: false
+            };
+          $scope.groceryList.push(groceryListObject);
+          Authentication.user = response;
+        }, function (response) {
+          $scope.error = response.data.message;
+        });
+        console.log('blip');
+        $scope.form.ingredientToAdd = '';
+      }
+    };
+
+    // Toggles clearConfirm to prevent accidents
+    $scope.clearAreYouSure = function() {
+      $scope.clearConfirm = true;
+    };
+
+    // Cancels the clearing
+    $scope.cancelClear = function() {
+      $scope.clearConfirm = false;
+    };
+
+    // Clears the entire grocery list
+    $scope.clearGroceryList = function() {
+      var user = new Users($scope.user);
+      user.groceryList = [];
+      user.$update(function (response) {
+        $scope.groceryList = [];
+        $scope.clearConfirm = false;
+        Authentication.user = response;
+      }, function (response) {
+        $scope.error = response.data.message;
+      });
+      console.log('blip');
+    };
   }
 ]);
-
-/*
-var user = new Users($scope.user);
-    // If user has no grocery list, make them an empty one
-    if(!user.groceryList){
-      user.groceryList = [];
-    }
-
-    // Cycles through selected ingredients and adds the content to the user's grocery list
-    for(var i = 0; i < $scope.selected.items.length; i++){
-      user.groceryList.push($scope.selected.items[i].content);
-    }
-    // Updates user, closes the modal, and redirects them to their grocery list
-    user.$update(function (response) {
-      $scope.success = true;
-      Authentication.user = response;
-      $modalInstance.dismiss('cancel');
-      $location.url('/grocerylist');
-    }, function (response) {
-      $scope.error = response.data.message;
-    });
-    console.log('blip');
-    */
