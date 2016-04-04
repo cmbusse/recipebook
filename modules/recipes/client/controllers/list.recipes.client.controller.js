@@ -3,7 +3,7 @@
 angular.module('recipes').controller('RecipesListController', ['$scope', 
   function ($scope) {
     $scope.buildPage = function() {
-        $scope.test = 'hello';
+      $scope.test = 'hello';
     };
         /*$scope.authentication = Authentication;
         $scope.recipes = RecipesService.query();

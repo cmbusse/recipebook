@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('GroceryListController', ['$scope', 'Authentication', 'Admin', 'Users', 
-  function ($scope, Authentication, Admin, Users) {
+angular.module('users').controller('GroceryListController', ['$scope', 'Authentication', 'Admin', 'Users', '$http', 
+  function ($scope, Authentication, Admin, Users, $http) {
     // function to build page in proper order
     $scope.buildPage = function() {
       $scope.authentication = Authentication;
@@ -19,7 +19,7 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
           $scope.users = data;
           $scope.findCurrentUserGroceryList();
           $scope.pageBuilt = true;
-      });
+        });
       }
     };
     
@@ -104,9 +104,9 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
         user.groceryList = tempGroceryListArray;
         user.$update(function (response) {
           var groceryListObject = {
-              content: user.groceryList[user.groceryList.length-1],
-              confirm: false
-            };
+            content: user.groceryList[user.groceryList.length-1],
+            confirm: false
+          };
           $scope.groceryList.push(groceryListObject);
           Authentication.user = response;
         }, function (response) {
@@ -139,6 +139,20 @@ angular.module('users').controller('GroceryListController', ['$scope', 'Authenti
         $scope.error = response.data.message;
       });
       console.log('blip');
+    };
+
+    $scope.test = function() {
+      console.log('bing');
+      /*
+      https://{AC7fdf8bcc702ecef025381d0fe6928104}:{2910582aff55d86a701cdce343d67ac7}@api.twilio.com/2010-04-01/Accounts
+
+      */
+      $http.post('/api/twilio', $scope.credentials).success(function (response) {
+        // If successful we assign the response to the global user model
+        console.log('in client');
+      }).error(function (response) {
+        $scope.error = response.message;
+      });
     };
   }
 ]);

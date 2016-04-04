@@ -9,20 +9,19 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$state', '
     $scope.form = {};
 
     $scope.buildPage = function() {
-        $scope.authentication = Authentication;
-        $scope.recipes = RecipesService.query();
-        $scope.myRecipes = [];
-
-        $scope.$watch('recipes.$resolved', function(newValue, oldValue) {
-            if(newValue === true){
-                Admin.query(function (data) {
-                    $scope.users = data;
-                    $scope.findCurrentUserID();
-                    $scope.seedMyRecipes();
-                    $scope.pageBuilt = true;
-                });
-            }
-        });
+      $scope.authentication = Authentication;
+      $scope.recipes = RecipesService.query();
+      $scope.myRecipes = [];
+      $scope.$watch('recipes.$resolved', function(newValue, oldValue) {
+        if(newValue === true){
+          Admin.query(function (data) {
+            $scope.users = data;
+            $scope.findCurrentUserID();
+            $scope.seedMyRecipes();
+            $scope.pageBuilt = true;
+          });
+        }
+      });
     };
 
     // finds current user's ID through searching all users for matching email
@@ -30,7 +29,7 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$state', '
       for(var i = 0; i < $scope.users.length; i++){
         if($scope.authentication.user.email === $scope.users[i].email){
           $scope.currentUserID = $scope.users[i]._id;
-                $scope.currentUser = $scope.users[i];
+          $scope.currentUser = $scope.users[i];
         }
       }
     };
@@ -38,12 +37,12 @@ angular.module('recipes').controller('RecipesController', ['$scope', '$state', '
     // seeds the user's recipes
     $scope.seedMyRecipes = function(){
       for(var i = 0; i < $scope.recipes.length; i++){
-            if($scope.recipes[i].user){
-                if($scope.recipes[i].user._id === $scope.currentUserID){
-                    $scope.myRecipes.push($scope.recipes[i]);
-                }
-            }
+        if($scope.recipes[i].user){
+          if($scope.recipes[i].user._id === $scope.currentUserID){
+            $scope.myRecipes.push($scope.recipes[i]);
+          }
         }
+      }
     };
 
     if ($scope.recipe._id){
