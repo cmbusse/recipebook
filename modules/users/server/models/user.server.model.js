@@ -59,6 +59,22 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true
   },
+  phoneAreaCode: {
+    type: String,
+    trim: true
+  },
+  phoneFirstThree: {
+    type: String,
+    trim: true
+  },
+  phoneLastFour: {
+    type: String,
+    trim: true
+  },
+  phoneVerified: {
+    type: Boolean,
+    default: false
+  },
   password: {
     type: String,
     default: ''

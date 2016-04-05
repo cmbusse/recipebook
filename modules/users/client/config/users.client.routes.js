@@ -71,6 +71,10 @@ angular.module('users').config(['$stateProvider',
       .state('grocerylist', {
         url: '/grocerylist',
         templateUrl: 'modules/users/client/views/grocery-list.client.html'
+      })
+      .state('verifyNumber-signup', {
+        url: '/verifynumber',
+        templateUrl: 'modules/users/client/views/verify-number.client.html'
       });
   }
 ]);
